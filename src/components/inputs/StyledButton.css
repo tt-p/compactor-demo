@@ -1,0 +1,26 @@
+.StyledButton > button {
+    padding: 1rem 0.8rem;
+    font-size: 1em;
+    text-align: center;
+    color: #fff;
+    background-color: #1357a6;
+    outline: none;
+    border: none;
+    border-radius: 1.2rem;
+    box-shadow: 0 0.3rem #777;
+    cursor: pointer;
+}
+
+.StyledButton > button:hover {
+    background-color: #104a8e
+}
+
+.StyledButton > button:active {
+    background-color: #104a8e;
+    box-shadow: 0 0.18rem #555;
+    transform: translateY(0.12rem);
+}
+
+.Expand {
+    width: 100%;
+}
