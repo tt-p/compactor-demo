@@ -1,4 +1,5 @@
 import FileLink from "./FileLink";
+import {hashCode} from "../common/StringUtils";
 
 const style = {
     ul: {
@@ -20,17 +21,21 @@ const style = {
 
 const FileList = (props) => {
 
-    const fileArray = props.fileArray;
+    const id = props.id;
+    const fileArray = props.items;
 
-    const renderFileList = () => fileArray
-            .map(file => <FileLink
-                key={file.fileName}
-                file={file}
-                nameLimit={20}
-            />);
+    const renderFileList = () => fileArray.map(file =>
+        <FileLink
+            key={hashCode(String(file.fileName + id))}
+            file={file} nameLimit={20}
+        />
+    );
 
     return ( fileArray.length === 0 ?
-            <div style={style.div}>
+            <div
+                id="#fileUploadFileList"
+                style={style.div}
+            >
                 No file chosen
             </div> :
             <div>

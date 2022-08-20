@@ -1,16 +1,8 @@
-export default class PDFReader {
+import * as pdfjsLib from "pdfjs-dist";
+import PDFJSWorker from "pdfjs-dist/build/pdf.worker.entry";
 
-    constructor(pdfjsLib) {
-        this.pdfjsLib = pdfjsLib;
-    }
+pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJSWorker;
 
-    read(pdf_url) {
-        return new Promise((resolve, reject) => {
-            this.pdfjsLib.getDocument(pdf_url).promise.then(
-                document => resolve(document),
-                () => reject("Error cannot read the pdf")
-            );
-        });
-    }
+const readPDF = (pdf_url) => pdfjsLib.getDocument(pdf_url).promise;
 
-}
+export default readPDF;

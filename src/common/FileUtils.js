@@ -1,12 +1,13 @@
+import {getFileSize, getPreFix} from "./Base64Utils";
 
 export const PDF_SMALL_COMPRESS_OPTIONS = {
-    pageScale: 1,
+    pageScale: 1.0,
     pageQuality: 0.75,
     pageFormat: "image/jpeg"
 };
 
 export const PDF_LARGE_COMPRESS_OPTIONS = {
-    pageScale: 1,
+    pageScale: 1.0,
     pageQuality: 0.45,
     pageFormat: "image/jpeg"
 };
@@ -35,11 +36,8 @@ export const PNG_LARGE_COMPRESS_OPTIONS = {
     pageFormat: "image/jpeg"
 };
 
-export const getFileExtension = (filename) => filename.slice(filename.lastIndexOf(".") + 1).toLowerCase();
-
-export const getBase64PreFix = (mimeType) => `data:${mimeType};base64,`;
-
-export const  getBase64FileSize = (base64Length) => Math.round(4 * Math.ceil((base64Length / 3)) * 0.5624896334383812);
+export const getFileExtension = (filename) =>
+    filename.slice(filename.lastIndexOf(".") + 1).toLowerCase();
 
 export const getImageObject = data => new Promise((resolve, reject) => {
     const image = new Image();
@@ -49,12 +47,10 @@ export const getImageObject = data => new Promise((resolve, reject) => {
 });
 
 export const setCompressedFileFields = (inputFile, base64String) => {
-    const [fileName, fileExtension] = inputFile.fileName.split(".");
-    const base64PreFixLength = getBase64PreFix(inputFile.mimeType).length;
+    const base64PreFixLength = getPreFix(inputFile.mimeType).length;
 
     inputFile.bytes = base64String.substring(base64PreFixLength);
-    inputFile.fileSize = getBase64FileSize(base64String.length);
-    inputFile.fileName = `${fileName}_compressed.${fileExtension}`;
+    inputFile.fileSize = getFileSize(base64String);
 }
 
 export const createCanvas = (width, height) => {
@@ -66,7 +62,7 @@ export const createCanvas = (width, height) => {
     return canvas;
 }
 
-export const createCanvasFromViewPort = (viewPort) => {
+export const createCanvasFromViewport = (viewPort) => {
     return createCanvas(viewPort.width || viewPort.viewBox[2], viewPort.height || viewPort.viewBox[3]);
 }
 

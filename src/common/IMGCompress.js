@@ -1,7 +1,6 @@
 import {
     createCanvas,
     createCanvasContext,
-    getBase64PreFix,
     getImageObject,
     JPEG_LARGE_COMPRESS_OPTIONS,
     JPEG_SMALL_COMPRESS_OPTIONS,
@@ -9,6 +8,7 @@ import {
     PNG_SMALL_COMPRESS_OPTIONS,
     setCompressedFileFields
 } from "./FileUtils";
+import {getPreFix} from "./Base64Utils";
 
 export const compressIMG = async (inputFile, callbackFunc, largeCompress) => {
 
@@ -20,7 +20,7 @@ export const compressIMG = async (inputFile, callbackFunc, largeCompress) => {
         options = largeCompress ? PNG_LARGE_COMPRESS_OPTIONS : PNG_SMALL_COMPRESS_OPTIONS;
     }
 
-    const image = await getImageObject(getBase64PreFix(options.pageFormat) + inputFile.bytes);
+    const image = await getImageObject(getPreFix(options.pageFormat) + inputFile.bytes);
 
     const width = image.width;
     const height = image.height;

@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import StyledButton from "./inputs/StyledButton";
 import {getPreFix} from "../common/Base64Utils";
 
@@ -11,22 +12,13 @@ const style = {
     }
 }
 
-const FileLink = (props) => {
+const FileDownload = (props) => {
 
     const file = props.file;
     const nameLimit = props.nameLimit - 3;
-    const base64 = (getPreFix(file.mimeType) + file.bytes);
 
-
-    const openFile = () => {
-        const win = window.open("about:blank");
-
-        const iframe = win.document.body.appendChild(document.createElement("iframe"));
-        iframe.src = base64;
-        win.document.body.style.margin = "0";
-        win.document.getElementsByTagName("iframe")[0].style.width = "100%";
-        win.document.getElementsByTagName("iframe")[0].style.height = "100%";
-        win.document.getElementsByTagName("iframe")[0].style.border = "0";
+    const downloadFile = () => {
+        saveAs((getPreFix(file.mimeType) + file.bytes), file.fileName);
     }
 
     const renderFileName = () => {
@@ -39,7 +31,7 @@ const FileLink = (props) => {
     return (
         <li style={style.li}>
             <StyledButton
-                onClick={openFile}
+                onClick={downloadFile}
                 style={style.button}
             >
                 {renderFileName()}
@@ -48,4 +40,4 @@ const FileLink = (props) => {
     );
 }
 
-export default FileLink;
+export default FileDownload;

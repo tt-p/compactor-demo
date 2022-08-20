@@ -1,22 +1,33 @@
-import './App.css';
 import FileUpload from "./components/FileUpload";
+import {compress} from "./common/FileCompress";
 
-const accept = "image/JPEG, image/PNG, application/PDF";
-const extensions = ["jpeg", "jpg", "png", "pdf"];
+const style = {
+    container: {
+        paddingTop: "40%",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center"
+    }
+}
 
+const accept = "application/PDF";
+const extensions = ["pdf"];
+const compressFunc = async (file, callback) =>
+    await compress(file, callback, true);
 
 function App() {
-  return (
-      <div className="App">
-          <FileUpload
-              multiple={true} accept={accept} extensions={extensions}
-              readOnly={false} disabled={false}
-              onChange={(fileList) => {
-                  console.log(fileList);
-              }}
-          />
-      </div>
-  );
+
+    return (
+        <div style={style.container}>
+            <FileUpload
+                multiple={true} accept={accept} extensions={extensions}
+                readOnly={false} disabled={false}
+                onChange={compressFunc}
+            />
+        </div>
+    );
 }
 
 export default App;

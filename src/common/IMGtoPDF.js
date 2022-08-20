@@ -1,50 +1,39 @@
 import PDFDocument from "pdfkit/js/pdfkit.standalone";
 import blobStream from "blob-stream/.js";
 import {getImageObject, setCompressedFileFields} from "./FileUtils";
+import {blobToBase64} from "./Base64Utils";
 
-export default class IMGtoPDF {
+const convertIMGtoPDF = async (images, inputFile, callBackFunc) => {
 
-    async convert(images, inputFile, callBackFunc) {
-        this.inputFile = inputFile;
-        this.callBackFunc = callBackFunc
+    const pdfDocument = createPDF(inputFile);
 
-        const pdfDoc = this.#createPDF();
+    const stream = pdfDocument.pipe(blobStream());
 
-        const stream = pdfDoc.pipe(blobStream());
-
-        for (let image of images) {
-            let imageObject = await getImageObject(image);
-            pdfDoc.addPage({size: [imageObject.width, imageObject.height]});
-            pdfDoc.image(imageObject.src, 0, 0);
-        }
-
-        pdfDoc.end();
-
-        stream.on("finish", async () => {
-            const outputBlob = stream.toBlob("application/pdf");
-            let base64String = await this.#blobToBase64(outputBlob);
-            setCompressedFileFields(this.inputFile, base64String);
-            this.callBackFunc(this.inputFile);
-        });
+    for (let image of images) {
+        let imageObject = await getImageObject(image);
+        pdfDocument.addPage({size: [imageObject.width, imageObject.height]});
+        pdfDocument.image(imageObject.src, 0, 0);
     }
 
-    #createPDF() {
-        const pdfDoc = new PDFDocument({ autoFirstPage: false, compress: false });
-        const fileName = this.inputFile.fileName.split(".")[0];
-        pdfDoc.info = {
-            Title: `${fileName}.pdf`,
-            Author: "mys",
-            Keywords: `${fileName}, pdf`
-        };
-        return pdfDoc;
-    }
+    pdfDocument.end();
 
-    #blobToBase64 (blob) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = () => reject("Error cannot convert the pdf");
-            reader.readAsDataURL(blob);
-        });
-    }
+    stream.on("finish", async () => {
+        const outputBlob = stream.toBlob("application/pdf");
+        let base64String = await blobToBase64(outputBlob);
+        setCompressedFileFields(inputFile, base64String);
+        callBackFunc(inputFile);
+    });
 }
+
+const createPDF = (inputFile) => {
+    const pdfDocument = new PDFDocument({ autoFirstPage: false, compress: false });
+    const fileName = inputFile.fileName.split(".")[0];
+    pdfDocument.info = {
+        Title: `${fileName}.pdf`,
+        Author: "mys",
+        Keywords: `${fileName}, pdf`
+    };
+    return pdfDocument;
+}
+
+export default convertIMGtoPDF;

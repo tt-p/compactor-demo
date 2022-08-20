@@ -1,42 +1,39 @@
-import {createCanvasContext, createCanvasFromViewPort} from "./FileUtils";
+import {createCanvasContext, createCanvasFromViewport} from "./FileUtils";
 
-export default class PDFtoIMG {
-
-    convert(inputFile, options) {
-        this.inputFile = inputFile;
-        this.pageCount = inputFile.numPages;
-        this.pageFormat = options.pageFormat;
-        this.pageScale = options.pageScale;
-        this.pageQuality = options.pageQuality;
-        this.canvas = null;
-
-        return this.#renderAllPages();
-    }
-
-    async #renderAllPages() {
-        let images = [];
-        for (let i = 1; i <= this.pageCount; i++) {
-            let page = await this.#renderPage(i);
-            images.push(JSON.parse(JSON.stringify(page)));
-        }
-
-        this.canvas.remove();
-
-        return images;
-    }
-
-    async #renderPage(pageNum) {
-
-        return this.inputFile.getPage(pageNum).then(page => {
-
-            const viewPort = page.getViewport({scale: 1});
-            this.canvas = createCanvasFromViewPort(viewPort);
-            const canvasContext = createCanvasContext(this.canvas);
-            const renderTaskParams = {canvasContext: canvasContext, viewport: viewPort}
-            const renderTask = page.render(renderTaskParams);
-
-            return renderTask.promise.then(() => this.canvas.toDataURL(this.pageFormat, this.pageQuality));
-        });
-    };
-
+const convertPDFtoIMG = (pdfDocumentProxy, options) => {
+    return renderAllPages(pdfDocumentProxy, options);
 }
+
+const renderAllPages = async (file, options) => {
+
+    const pageFormat = options.pageFormat;
+    const pageScale = options.pageScale;
+    const pageQuality = options.pageQuality;
+
+    let images = [];
+
+    for (let i = 1; i <= file.numPages; i++) {
+        let pdfPageProxy = await file.getPage(i);
+        let renderedPage = await renderPage(pdfPageProxy, pageFormat, pageScale, pageQuality);
+        images.push(JSON.parse(JSON.stringify(renderedPage)));
+    }
+
+    return images;
+}
+
+const renderPage = async (pdfPageProxy, pageFormat, pageScale, pageQuality) => {
+    const pageViewport = pdfPageProxy.getViewport({scale: pageScale});
+    const canvas = createCanvasFromViewport(pageViewport);
+    const canvasContext = createCanvasContext(canvas);
+    const renderTaskParams = {canvasContext: canvasContext, viewport: pageViewport}
+
+    await pdfPageProxy.render(renderTaskParams).promise;
+
+    const base64 = canvas.toDataURL(pageFormat, pageQuality);
+
+    canvas.remove();
+
+    return base64;
+};
+
+export default convertPDFtoIMG;
