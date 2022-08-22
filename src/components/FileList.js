@@ -1,5 +1,7 @@
 import FileLink from "./FileLink";
 import {hashCode} from "../common/StringUtils";
+import {useContext} from "react";
+import {FileContext} from "../context/FileContext";
 
 const style = {
     ul: {
@@ -22,13 +24,17 @@ const style = {
 const FileList = (props) => {
 
     const id = props.id;
-    const fileArray = props.items;
+    const filterFunc = props.filterFunc;
 
-    const renderFileList = () => fileArray.map(file =>
-        <FileLink
-            key={hashCode(String(file.fileName + id))}
-            file={file} nameLimit={20}
-        />
+    const fileArray = useContext(FileContext);
+
+    const renderFileList = () => fileArray
+        .filter(filterFunc)
+        .map(file =>
+            <FileLink
+                key={hashCode(String(file.fileName + id))}
+                file={file} nameLimit={20}
+            />
     );
 
     return ( fileArray.length === 0 ?

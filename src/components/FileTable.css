@@ -1,0 +1,26 @@
+.TableContainer {
+    padding: 1rem 0;
+}
+
+.FileTable {
+    border-collapse: collapse;
+}
+
+.FileTable td, .FileTable th {
+    border: 1px solid white;
+    padding: 0.8rem 2rem;
+}
+
+.FileTable tr:nth-child(even) {
+    background-color: #e4f0f6;
+}
+
+.FileTable tr:hover {
+    background-color: #bcd9ea;
+}
+
+.FileTable th {
+    padding: 1rem;
+    background-color: #055a8c;
+    color: white;
+}

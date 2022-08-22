@@ -3,41 +3,38 @@ import {getFileSize, getPreFix} from "./Base64Utils";
 export const PDF_SMALL_COMPRESS_OPTIONS = {
     pageScale: 1.0,
     pageQuality: 0.75,
-    pageFormat: "image/jpeg"
 };
 
 export const PDF_LARGE_COMPRESS_OPTIONS = {
     pageScale: 1.0,
     pageQuality: 0.45,
-    pageFormat: "image/jpeg"
 };
 
 export const JPEG_SMALL_COMPRESS_OPTIONS = {
     pageScale: 1.0,
     pageQuality: 0.1,
-    pageFormat: "image/jpeg"
 };
 
 export const JPEG_LARGE_COMPRESS_OPTIONS = {
     pageScale: 1.0,
     pageQuality: 0.05,
-    pageFormat: "image/jpeg"
 };
 
 export const PNG_SMALL_COMPRESS_OPTIONS = {
     pageScale: 1.0,
     pageQuality: 0.50,
-    pageFormat: "image/jpeg"
 };
 
 export const PNG_LARGE_COMPRESS_OPTIONS = {
     pageScale: 1.0,
     pageQuality: 0.25,
-    pageFormat: "image/jpeg"
 };
 
 export const getFileExtension = (filename) =>
     filename.slice(filename.lastIndexOf(".") + 1).toLowerCase();
+
+export const getFileName = (filename) =>
+    filename.slice(0, filename.lastIndexOf(".")).toLowerCase();
 
 export const getImageObject = data => new Promise((resolve, reject) => {
     const image = new Image();

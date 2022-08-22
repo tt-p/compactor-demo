@@ -1,18 +1,14 @@
 import {compressPDF} from "./PDFCompress";
 import {compressIMG} from "./IMGCompress";
-import {
-    PDF_LARGE_COMPRESS_OPTIONS,
-    PDF_SMALL_COMPRESS_OPTIONS
-} from "./FileUtils";
 
-export const compress = async (inputFile, callbackFunc, largeCompress) => {
+export const compress = async (inputFile, callbackFunc, options) => {
 
     const mimeType = inputFile.mimeType;
 
     if (mimeType === "application/pdf") {
-        await compressPDF(inputFile, callbackFunc, largeCompress ? PDF_LARGE_COMPRESS_OPTIONS : PDF_SMALL_COMPRESS_OPTIONS);
+        await compressPDF(inputFile, callbackFunc, options);
     } else if (mimeType === "image/jpeg" || mimeType === "image/png") {
-        await compressIMG(inputFile, callbackFunc, largeCompress);
+        await compressIMG(inputFile, callbackFunc, options);
     } else {
         console.log(`Error cannot compress mime type: ${mimeType}`);
     }

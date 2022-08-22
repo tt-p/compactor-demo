@@ -5,23 +5,20 @@ const convertPDFtoIMG = (pdfDocumentProxy, options) => {
 }
 
 const renderAllPages = async (file, options) => {
-
-    const pageFormat = options.pageFormat;
-    const pageScale = options.pageScale;
-    const pageQuality = options.pageQuality;
-
     let images = [];
 
     for (let i = 1; i <= file.numPages; i++) {
         let pdfPageProxy = await file.getPage(i);
-        let renderedPage = await renderPage(pdfPageProxy, pageFormat, pageScale, pageQuality);
+        let renderedPage = await renderPage(pdfPageProxy, options);
         images.push(JSON.parse(JSON.stringify(renderedPage)));
     }
 
     return images;
 }
 
-const renderPage = async (pdfPageProxy, pageFormat, pageScale, pageQuality) => {
+const renderPage = async (pdfPageProxy, options) => {
+    const {pageScale, pageQuality} = {...options}
+
     const pageViewport = pdfPageProxy.getViewport({scale: pageScale});
     const canvas = createCanvasFromViewport(pageViewport);
     const canvasContext = createCanvasContext(canvas);
@@ -29,7 +26,7 @@ const renderPage = async (pdfPageProxy, pageFormat, pageScale, pageQuality) => {
 
     await pdfPageProxy.render(renderTaskParams).promise;
 
-    const base64 = canvas.toDataURL(pageFormat, pageQuality);
+    const base64 = canvas.toDataURL("image/jpeg", pageQuality);
 
     canvas.remove();
 

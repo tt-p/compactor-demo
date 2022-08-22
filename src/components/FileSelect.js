@@ -1,12 +1,16 @@
 import {getFileExtension} from "../common/FileUtils";
-import {createRef} from "react";
+import {createRef, useContext} from "react";
 import StyledButton from "./inputs/StyledButton";
 import {blobToBase64, getPreFix} from "../common/Base64Utils";
+import {FileDispatchContext} from "../context/FileContext";
 
 const FileSelect = (props) => {
 
     const {accept, extensions, multiple, readOnly, disabled, onChange} = {...props}
+
     const fileInputRef = createRef();
+
+    const setFileArray = useContext(FileDispatchContext)
 
     const fileListToFileArray = (fileList) => Object.values(fileList);
 
@@ -38,6 +42,8 @@ const FileSelect = (props) => {
             if (isProperExtension) {
 
                 const processedFileArray = await processInputFileArray(inputFileArray);
+
+                setFileArray(JSON.parse(JSON.stringify(processedFileArray)));
 
                 for (const file of processedFileArray) {
                     await onChange(file);

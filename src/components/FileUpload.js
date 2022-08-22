@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {useContext} from "react";
 import FileSelect from "./FileSelect";
 import FileList from "./FileList";
+import {FileDispatchContext} from "../context/FileContext";
 
 const style = {
     div: {
@@ -13,9 +14,10 @@ const FileUpload = (props) => {
 
     const {accept, extensions, multiple, readOnly, disabled, onChange} = {...props}
 
-    const [fileArray, setFileArray] = useState([]);
+    const setFileArray = useContext(FileDispatchContext);
 
     const addFileCallback = (file) => {
+        file["isProcessed"] = true;
         setFileArray(fileArray => [...fileArray, file]);
     }
 
@@ -26,7 +28,7 @@ const FileUpload = (props) => {
                 readOnly={readOnly} disabled={disabled}
                 onChange={(file) => onChange(file, addFileCallback)}
             />
-            <FileList id={"compressed"} items={fileArray} />
+            <FileList id={"normal"} filterFunc={(file) => file.isProcessed} />
         </div>
     );
 }
