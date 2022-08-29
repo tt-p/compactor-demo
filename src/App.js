@@ -1,7 +1,7 @@
+import {useState} from "react";
+import {compressFile} from "compactor";
 import FileUpload from "./components/FileUpload";
 import Slider from "./components/inputs/Slider";
-import {compress} from "compactor";
-import {useState} from "react";
 import {FileProvider} from "./context/FileContext";
 import FileTable from "./components/FileTable";
 
@@ -36,9 +36,8 @@ function App() {
     const [quality, setQuality] = useState(defaultQuality);
 
     const compressFunc = async (file, callback) => {
-        return await compress(file, callback, {pageScale: scale, pageQuality: quality});
+        return await compressFile(file, callback, {pageScale: scale, pageQuality: quality});
     }
-
 
     return (
         <div style={style.center}>

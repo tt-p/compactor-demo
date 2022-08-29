@@ -1,7 +1,7 @@
-import {getFileExtension} from "compactor/lib/util/FileUtils";
 import {createRef, useContext} from "react";
-import StyledButton from "./inputs/StyledButton";
+import {getFileExtension} from "compactor/lib/util/FileUtils";
 import {blobToBase64, getPreFix} from "compactor/lib/util/Base64Utils";
+import StyledButton from "./inputs/StyledButton";
 import {FileDispatchContext} from "../context/FileContext";
 
 const FileSelect = (props) => {
