@@ -1,6 +1,5 @@
 import {useContext} from "react";
 import FileSelect from "./FileSelect";
-import FileList from "./FileList";
 import {FileDispatchContext} from "../context/FileContext";
 
 const style = {
@@ -28,7 +27,6 @@ const FileUpload = (props) => {
                 readOnly={readOnly} disabled={disabled}
                 onChange={(file) => onChange(file, addFileCallback)}
             />
-            <FileList id={"normal"} filterFunc={(file) => file.isProcessed} />
         </div>
     );
 }

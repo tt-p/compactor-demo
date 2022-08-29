@@ -1,6 +1,6 @@
 import { saveAs } from 'file-saver';
 import StyledButton from "./inputs/StyledButton";
-import {getPreFix} from "../common/Base64Utils";
+import {getPreFix} from "compactor/lib/util/Base64Utils";
 
 const style = {
     li: {
@@ -29,14 +29,12 @@ const FileDownload = (props) => {
     }
 
     return (
-        <li style={style.li}>
-            <StyledButton
-                onClick={downloadFile}
-                style={style.button}
-            >
-                {renderFileName()}
-            </StyledButton>
-        </li>
+        <StyledButton
+            onClick={downloadFile}
+            style={style.button}
+        >
+            {renderFileName()}
+        </StyledButton>
     );
 }
 

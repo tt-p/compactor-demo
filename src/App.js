@@ -1,6 +1,6 @@
 import FileUpload from "./components/FileUpload";
-import {compress} from "./common/FileCompress";
 import Slider from "./components/inputs/Slider";
+import {compress} from "compactor";
 import {useState} from "react";
 import {FileProvider} from "./context/FileContext";
 import FileTable from "./components/FileTable";
@@ -28,8 +28,8 @@ const extensions = ["png", "jpeg", "jpg", "pdf"];
 
 function App() {
 
-    const defaultScale = 1;
-    const defaultQuality = 1;
+    const defaultScale = 1.0;
+    const defaultQuality = 0.75;
 
     const [scale, setScale] = useState(defaultScale);
 
@@ -46,11 +46,13 @@ function App() {
                 <Slider
                     label={"Scale"}
                     defaultValue={defaultScale} fpDigits={2}
+                    upperBound={2}
                     onChange={(val) => setScale(val)}
                 />
                 <Slider
                     label={"Quality"}
                     defaultValue={defaultQuality} fpDigits={2}
+                    upperBound={1}
                     onChange={(val) => setQuality(val)}
                 />
                 <FileProvider>

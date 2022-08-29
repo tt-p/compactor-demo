@@ -1,7 +1,9 @@
 import {useContext} from "react";
 import {FileContext} from "../context/FileContext";
-import {hashCode} from "../common/StringUtils";
+import {hashCode} from "compactor/lib/util/StringUtils";
 import "./FileTable.css"
+import FileLink from "./FileLink";
+import FileDownload from "./FileDownload";
 
 const FileTable = () => {
 
@@ -13,6 +15,8 @@ const FileTable = () => {
             <td>{file.mimeType}</td>
             <td>{`${Math.round(file.fileSize * 0.001)} KB`}</td>
             <td>{file.isProcessed ? "Yes" : "No"}</td>
+            <td>{<FileLink file={file} nameLimit={20}/>}</td>
+            <td>{<FileDownload file={file} nameLimit={20}/>}</td>
         </tr>
     );
 
@@ -26,6 +30,8 @@ const FileTable = () => {
                             <th>Mime Type</th>
                             <th>File Size</th>
                             <th>Compressed</th>
+                            <th>Link</th>
+                            <th>Download</th>
                         </tr>
                     </thead>
                     <tbody>

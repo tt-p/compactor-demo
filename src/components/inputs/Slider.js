@@ -18,13 +18,13 @@ const style = {
 
 const Slider = (props) => {
 
-    const {label, defaultValue, fpDigits, onChange} = {...props}
+    const {label, defaultValue, fpDigits, upperBound, onChange} = {...props}
 
-    const max = 10 ** fpDigits;
+    const max = (10 ** fpDigits) * upperBound;
 
-    const adjustValue = (e) => e / max;
+    const adjustValue = (e) => e * upperBound / max;
 
-    const readjustValue = (e) => e * max;
+    const readjustValue = (e) => e / upperBound * max;
 
     const [value, setValue] = useState((readjustValue(defaultValue)) || 0);
 

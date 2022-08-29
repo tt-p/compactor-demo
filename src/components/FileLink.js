@@ -1,5 +1,5 @@
 import StyledButton from "./inputs/StyledButton";
-import {getPreFix} from "../common/Base64Utils";
+import {getPreFix} from "compactor/lib/util/Base64Utils";
 
 const style = {
     li: {
@@ -16,7 +16,6 @@ const FileLink = (props) => {
     const file = props.file;
     const nameLimit = props.nameLimit - 3;
     const base64 = (getPreFix(file.mimeType) + file.bytes);
-
 
     const openFile = () => {
         const win = window.open("about:blank");
@@ -37,14 +36,12 @@ const FileLink = (props) => {
     }
 
     return (
-        <li style={style.li}>
-            <StyledButton
-                onClick={openFile}
-                style={style.button}
-            >
-                {renderFileName()}
-            </StyledButton>
-        </li>
+        <StyledButton
+            onClick={openFile}
+            style={style.button}
+        >
+            {renderFileName()}
+        </StyledButton>
     );
 }
 
