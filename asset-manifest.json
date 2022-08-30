@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/compactor-demo/static/css/main.82d139ac.css",
-    "main.js": "/compactor-demo/static/js/main.f1a72a94.js",
+    "main.js": "/compactor-demo/static/js/main.d5f6bc7d.js",
     "index.html": "/compactor-demo/index.html",
     "main.82d139ac.css.map": "/compactor-demo/static/css/main.82d139ac.css.map",
-    "main.f1a72a94.js.map": "/compactor-demo/static/js/main.f1a72a94.js.map"
+    "main.d5f6bc7d.js.map": "/compactor-demo/static/js/main.d5f6bc7d.js.map"
   },
   "entrypoints": [
     "static/css/main.82d139ac.css",
-    "static/js/main.f1a72a94.js"
+    "static/js/main.d5f6bc7d.js"
   ]
 }
