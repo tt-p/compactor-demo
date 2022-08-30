@@ -22,7 +22,7 @@ const style = {
     }
 }
 
-const accept = "application/PDF";
+const accept = "application/PDF, image/jpeg, image/jpg, image/png";
 const extensions = ["png", "jpeg", "jpg", "pdf"];
 
 
