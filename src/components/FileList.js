@@ -1,7 +1,7 @@
-import {hashCode} from "compactor/lib/util/StringUtils";
+import {hashCode} from "compactor/src/util/StringUtils";
 import {useContext} from "react";
 import {FileContext} from "../context/FileContext";
-import FileLinkLi from "./FileLinkLi";
+import FileLink from "./FileLink";
 
 const style = {
     ul: {
@@ -31,7 +31,7 @@ const FileList = (props) => {
     const renderFileList = () => fileArray
         .filter(filterFunc)
         .map(file =>
-            <FileLinkLi
+            <FileLink
                 key={hashCode(String(file.fileName + id))}
                 file={file} nameLimit={20}
             />

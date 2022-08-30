@@ -1,6 +1,6 @@
 import {createRef, useContext} from "react";
-import {getFileExtension} from "compactor/lib/util/FileUtils";
-import {blobToBase64, getPreFix} from "compactor/lib/util/Base64Utils";
+import {getFileExtension} from "compactor/src/util/FileUtils";
+import {blobToBase64, getPreFix} from "compactor/src/util/Base64Utils";
 import StyledButton from "./inputs/StyledButton";
 import {FileDispatchContext} from "../context/FileContext";
 

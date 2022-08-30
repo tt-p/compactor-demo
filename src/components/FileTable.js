@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {FileContext} from "../context/FileContext";
-import {hashCode} from "compactor/lib/util/StringUtils";
+import {hashCode} from "compactor/src/util/StringUtils";
 import "./FileTable.css"
 import FileLink from "./FileLink";
 import FileDownload from "./FileDownload";

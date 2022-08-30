@@ -1,5 +1,5 @@
 import StyledButton from "./inputs/StyledButton";
-import {getPreFix} from "compactor/lib/util/Base64Utils";
+import {getPreFix} from "compactor/src/util/Base64Utils";
 
 const style = {
     li: {
