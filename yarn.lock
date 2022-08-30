@@ -3053,10 +3053,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==
 
-compactor@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/compactor/-/compactor-0.0.13.tgz#31fb1d8db5a05905fe0d902c81d966bc2d890634"
-  integrity sha512-CMG7MtqR1GTVRUPYqjKAuThz5Ef8+7yHS2L28qfa9jf48irR4XKwYFJ29oYQDxWAZKNB7ssFgYh4+BB5mXNXYA==
+compactor@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/compactor/-/compactor-0.1.0.tgz#73725feee81808f2821e776cabb32bca3950a52a"
+  integrity sha512-4PUQ0Hm70b93AdPGdMai7nWcI0xXctGHz2dPIb1Tx0DzatKLs7XHvU+buj0SEMDfqTZYmvATX9qlbduTA7RnRA==
   dependencies:
     pdfjs-dist "^2.15.349"
     pdfkit "^0.13.0"

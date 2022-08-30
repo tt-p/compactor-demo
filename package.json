@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://tt-p.github.io/compactor-demo",
   "dependencies": {
-    "compactor": "^0.0.13",
+    "compactor": "^0.1.0",
     "file-saver": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

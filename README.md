@@ -21,3 +21,7 @@ installing node_modules,
 starting development server,
 
 `npm start` or `yarn start`
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

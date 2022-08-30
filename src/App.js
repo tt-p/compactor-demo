@@ -7,7 +7,6 @@ import FileTable from "./components/FileTable";
 
 const style = {
     center: {
-        paddingTop: "20%",
         height: "100vh",
         display: "flex",
         flexDirection: "column",
