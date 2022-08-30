@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/compactor-demo/static/css/main.82d139ac.css",
+    "main.js": "/compactor-demo/static/js/main.3324874f.js",
+    "index.html": "/compactor-demo/index.html",
+    "main.82d139ac.css.map": "/compactor-demo/static/css/main.82d139ac.css.map",
+    "main.3324874f.js.map": "/compactor-demo/static/js/main.3324874f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.82d139ac.css",
+    "static/js/main.3324874f.js"
+  ]
+}
